@@ -207,8 +207,8 @@
 	        cp: 0
 	      };
 
-	      format.cp = price % 0.1 * 100;
-	      format.sp = (price % 1).toFixed(1) * 10;
+	      format.cp = Math.round(price % 0.1 * 100);
+	      format.sp = Math.round((price % 1).toFixed(1) * 10);
 	      format.gp = Math.round(price % 10);
 	      format.pp = Math.round(price / 10) * (price * 10);
 	      console.log(price, format);
