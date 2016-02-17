@@ -1006,14 +1006,14 @@ export default {
     'pick',
   ],
   menuItems: [
-    {name: 'Ale', weight: 8.0},
-    {name: 'Lager', weight: 6.0},
-    {name: 'Stout', weight: 2.0},
-    {name: 'Mead', weight: 6.0},
-    {name: 'Cherry Mead', weight: 1.0},
-    {name: 'Cider', weight: 3.0},
-    {name: 'Rum', weight: 1.0},
-    {name: 'Wine', weight: 4.0},
-    {name: 'Hooch', weight: 1.5}
+    {name: 'Ale', weight: 8.0, price: 0.02},
+    {name: 'Lager', weight: 6.0, price: 0.03},
+    {name: 'Stout', weight: 2.0, price: 0.04},
+    {name: 'Mead', weight: 6.0, price: 0.01},
+    {name: 'Cherry Mead', weight: 1.0, price: 0.10},
+    {name: 'Cider', weight: 3.0, price: 0.08},
+    {name: 'Rum', weight: 1.0, price: 0.1},
+    {name: 'Wine', weight: 4.0, price: 0.1},
+    {name: 'Hooch', weight: 1.5, price: 0.05}
   ]
 };

@@ -1,4 +1,5 @@
 `use strict`;
+/* jshint esnext: true */
 
 import tavernData from './../data/TavernData.js';
 
@@ -7,13 +8,13 @@ export default class Tavern {
     this.name = this.generateName();
     this.wealth = this.generateWealth();
     this.menu = this.generateMenu();
-    this.formatMenuAsTbody = function(){
+    this.formatMenuAsTbody = ()=>{
       let output = '';
       this.menu.forEach((item) =>{
-        output += `<tr><td>${item.name}</td><td>(${item.quality})</td><td>${this.priceFormatter(item.price)}</td></tr>`;
+        output += `<tr><td>${item.name}</td><td>(${item.quality})</td><td>${this.priceFormatter(Number(item.price))}</td></tr>`;
       });
       return output;
-    }
+    };
   }
   generateName() {
     let getWord = _.flow(_.sample, _.capitalize);
@@ -40,7 +41,7 @@ export default class Tavern {
     let level =  _.find(levels, function(level){
       return level.wealth >= wealth;
     });
-    if(level.name) { return level.name; } else { return 'squalid' }
+    if(level.name) { return level.name; } else { return 'squalid'; }
   }
   generateMenu() {
     let wealthModifiers = {
@@ -71,12 +72,14 @@ export default class Tavern {
           itemEntry.name = item.name;
           let qual = _.random(0, 2) * modifier;
           itemEntry.quality = _.findKey(qualityModifiers, function(modifier){
-            console.log('modifier', modifier);
             return modifier >= qual;
           });
           if(!itemEntry.quality) itemEntry.quality = 'poor';
           let basePrice = item.price || 0.02;
           itemEntry.price = Number(basePrice) * Number(qualityModifiers[itemEntry.quality]);
+          itemEntry.price = itemEntry.price.toFixed(2);
+          if(itemEntry.price < 0.01) itemEntry.price = 0.01;
+          console.log(itemEntry);
           return itemEntry;
         }else{
           return false;
@@ -101,20 +104,21 @@ export default class Tavern {
       sp: 0,
       cp: 0
     };
-    format.pp = Math.floor(price / 100);
-    price =- format.pp * 100;
-    format.gp = Math.floor(price);
-    format.sp = Math.floor((price * 10) - (format.gp * 10));
-    format.cp = Math.floor( (price * 100) - ( ( format.gp * 100) + (format.sp * 10) ));
+
+    format.cp = (price % 0.1) * 100;
+    format.sp = ((price % 1).toFixed(1)) * 10;
+    format.gp = Math.round(price % 10);
+    format.pp = Math.round( price / 10 ) * ( price * 10 );
     console.log(price, format);
     if(format.pp === 0) delete format.pp;
     if(format.gp === 0) delete format.gp;
     if(format.sp === 0) delete format.sp;
     if(format.cp === 0) delete format.cp;
+
     var str = '';
     _.keys(format).forEach(function(key){
-      str = format[key] + key;
+      str = Number(format[key]) + key;
     });
     return str;
-  };
+  }
 }
