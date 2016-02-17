@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Tavern Generator</title>
+  <link rel="stylesheet" href="normalize.css">
+  <link rel="stylesheet" href="skeleton.css">
+  <style>
+    #btnContainer {
+      margin-left: auto;
+      margin-right: auto;
+      text-align: center;
+    }
+    #generateBtn {
+      min-height: 50px;
+    }
+    #results {
+      max-height: 80vh;
+      overflow-x: scroll;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="twelve column" id="btnContainer"><button id="generateBtn" type="button" class="button-primary" onclick="generateTavern()">Generate Tavern</button></div>
+    </div>
+    <div class="row" id="results-area">
+      <div class="twelve column" id="results">
+
+      </div>
+    </div>
+  </div>
+<script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
+<script src="js/vendor/lodash.min.js"></script>
+<script src="assets/bundle.js"></script>
+</body>
+</html>
